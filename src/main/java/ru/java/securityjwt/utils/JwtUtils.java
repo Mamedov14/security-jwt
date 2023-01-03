@@ -7,7 +7,6 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.java.securityjwt.dto.UserDto;
@@ -24,12 +23,9 @@ public class JwtUtils {
     @Value("${app.jwt-secrets}")
     String secretKey;
 
-    public String generateToken(UserDto user) throws Exception {
-        if (user.getUsername() == null || user.getPassword() == null) {
-            throw new ServletException("Please enter a valid username and password");
-        }
+    public String generateToken(UserDto user) {
         Date current = new Date();
-        //ExpiryTime is set to 15 min from issued date
+        //15 min
         Date expiryDate = new Date(current.getTime() + expiryTime);
         return Jwts.builder()
                 .setSubject(user.getUsername())

@@ -21,7 +21,6 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtils utils;
-
     private final UserServiceImpl service;
 
     @Override
@@ -46,8 +45,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private String getJwtFromHeaderToken(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
-        if (token != null && token.startsWith("Bearer "))
+        if (token != null && token.startsWith("Bearer ")) {
             return token.substring(7);
+        }
         return null;
     }
 }

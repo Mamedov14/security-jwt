@@ -1,20 +1,21 @@
 package ru.java.securityjwt.service;
 
 
-import org.springframework.http.ResponseEntity;
 import ru.java.securityjwt.dto.UserDto;
 import ru.java.securityjwt.entity.User;
 
+import java.util.List;
+
 public interface UserService {
-    ResponseEntity<?> getAllUsers() throws Exception;
+    List<User> findAll();
 
-    ResponseEntity<?> addUser(User user) throws Exception;
+    void save(User user);
 
-    ResponseEntity<?> findById(Long id) throws Exception;
+    User findById(Long id);
 
-    ResponseEntity<?> updateUser(User user) throws Exception;
+    void update(User user);
 
-    ResponseEntity<?> login(UserDto user) throws Exception;
+    String login(UserDto user);
 
-    ResponseEntity<?> deleteById(Long id) throws Exception;
+    void delete(Long id);
 }
